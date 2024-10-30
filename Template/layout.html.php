@@ -1,5 +1,4 @@
 <?php
-session_start();
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +10,7 @@ session_start();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <?php include 'PHP/config/db.php'; ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/PHP-Web-main/PHP/config/db.php'; ?>
     
     <!-- Header -->
     <header class="flex items-center justify-between bg-white text-black p-4">
@@ -19,10 +18,11 @@ session_start();
             <img src="images/logo.jpeg" alt="Student Social Media" class="w-16 h-12 rounded-lg">
         </div>
         <div class="mid flex item-center justify-center flex-grow"> 
-            <a href="../index.php" class="hover:text-yellow-900 px-3 py-2 rounded"><i class="fa-solid fa-igloo ml-4"></i> Home</a>
+            <a href="/PHP-Web-main/index.php" class="hover:text-yellow-900 px-3 py-2 rounded"><i class="fa-solid fa-igloo ml-4"></i> Home</a>
             <a href="/about" class="hover:text-yellow-900 px-3 py-2 rounded"><i class="fa-regular fa-address-card ml-4"></i> About</a>
-            <a href="PHP/my_question.php" class="hover:text-yellow-900 px-3 py-2 rounded"><i class="fa-solid fa-user-tie"></i> My Questions</a>
-            <form action="" class="relative flex items-center">
+            <a href="/PHP-Web-main/PHP/my_question.php" class="hover:text-yellow-900 px-3 py-2 rounded"><i class="fa-solid fa-user-tie"></i> My Questions</a>
+            <!-- Search bar -->
+            <form action="PHP/process_search.php" method="POST" class="relative flex items-center">
                 <i class="fa-solid fa-magnifying-glass absolute left-3 text-gray-500"></i>
                 <input type="text" name="search" placeholder="Type anything to search..." 
                     class="pl-10 hover:text-yellow-900 px-3 py-2 border rounded w-full md:w-64 lg:w-80"">

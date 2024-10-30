@@ -3,6 +3,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/PHP-Web-main/PHP/config/db.php';
 
 session_start();
 
+
 // Check user login or not
 if (!isset($_SESSION['user_id'])) {
     echo "User is not logged in. Please log in to upload a post.";
