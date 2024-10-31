@@ -1,6 +1,3 @@
-<?php
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +12,7 @@
     <!-- Header -->
     <header class="flex items-center justify-between bg-white text-black p-4">
         <div class="logo">
-            <img src="images/logo.jpeg" alt="Student Social Media" class="w-16 h-12 rounded-lg">
+            <img src="/PHP-Web-main/images/logo.jpeg" alt="Student Social Media" class="w-16 h-12 rounded-lg">
         </div>
         <div class="mid flex item-center justify-center flex-grow"> 
             <a href="/PHP-Web-main/index.php" class="hover:text-yellow-900 px-3 py-2 rounded"><i class="fa-solid fa-igloo ml-4"></i> Home</a>
@@ -67,6 +64,56 @@
             </div>
         </div>
     </footer>
+
+
+    <!-- Modal -->
+
+    <!-- Upload post modal -->
+    <div id="uploadModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="bg-white p-6 rounded-lg w-1/3">
+            <h2 class="text-xl font-bold mb-4">Upload Post</h2>
+            <form action="/PHP-Web-main/PHP/upload_post.php" method="POST" enctype="multipart/form-data">
+                <!-- Title -->
+                <input type="text" name="title" placeholder="Title" class="w-full p-2 border mb-4">
+                <!-- Content -->
+                <textarea name="content" placeholder="Content" class="w-full p-2 border mb-4"></textarea>
+                <!-- Image Upload -->
+                <input type="file" name="image" class="w-full p-2 border mb-4">
+                
+                <div class="flex space-x-4 justify-between">
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Post</button>
+                    <button type="button" onclick="toggleModal('uploadModal')" class="text-red-500 px-4 py-2">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="bg-white p-6 rounded-lg w-1/3">
+            <h2 class="text-xl font-bold mb-4">Login</h2>
+            <form action="PHP/process_login.php" method="POST">
+                <input type="text" name="username" placeholder="Username" class="w-full p-2 border mb-4">
+                <input type="password" name="password" placeholder="Password" class="w-full p-2 border mb-4">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Login</button>
+                <button type="button" onclick="toggleModal('loginModal')" class="text-red-500 px-4 py-2">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="bg-white p-6 rounded-lg w-1/3">
+            <h2 class="text-xl font-bold mb-4">Register</h2>
+            <form action="PHP/process_register.php" method="POST">
+                <input type="text" name="username" placeholder="Username" class="w-full p-2 border mb-4">
+                <input type="password" name="password" placeholder="Password" class="w-full p-2 border mb-4">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Register</button>
+                <button type="button" onclick="toggleModal('registerModal')" class="text-red-500 px-4 py-2">Cancel</button>
+            </form>
+        </div>
+    </div>
 
     <script src="/PHP-Web-Main/JS/script.js"></script>
 
