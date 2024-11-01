@@ -1,16 +1,19 @@
 <?php
-session_start();
+include $_SERVER['DOCUMENT_ROOT'] . '/PHP-Web-main/PHP/session_start.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/PHP-Web-main/PHP/config/db.php';
-
-// Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
-    header("Location: PHP/login.php");
-    exit;
-}
 
 // Retrieve the user’s questions
 $userId = $_SESSION['user_id'];
-$stmt = $pdo->prepare("SELECT title, content, created_at, id, image FROM posts WHERE user_id = :user_id ORDER BY created_at DESC");
+
+// SQL statement
+$stmt = $pdo->prepare("
+    SELECT posts.id, posts.title, posts.content, posts.user_id, posts.likes, posts.comments, posts.bookmarks, posts.image, posts.created_at,
+           modules.module_name 
+    FROM posts
+    LEFT JOIN modules ON posts.module_id = modules.id
+    WHERE posts.user_id = :user_id
+    ORDER BY posts.created_at DESC
+");
 $stmt->execute(['user_id' => $userId]);
 $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -27,6 +30,11 @@ ob_start();
                 <div class="flex-grow">
                     <h2 class="text-xl font-bold"><?php echo htmlspecialchars($question['title']); ?></h2>
                     <p><?php echo htmlspecialchars($question['content']); ?></p>
+
+                    <!-- Display the module name -->
+                    <?php if (!empty($question['module_name'])): ?>
+                        <p class='text-sm text-gray-600'>Module: <?php echo htmlspecialchars($question['module_name']); ?></p>
+                    <?php endif; ?>
                     
                     <!-- Display Image if Available -->
                     <?php if (!empty($question['image'])): ?>
@@ -67,3 +75,4 @@ ob_start();
 $content = ob_get_clean();
 
 include '../Template/layout.html.php';
+?>

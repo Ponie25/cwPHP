@@ -7,7 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['post_id'])) {
     $postId = $_POST['post_id'];
     $title = trim($_POST['title']);
     $content = trim($_POST['content']);
-
+    $module_id = $_POST['module_id'];
+    
     // Fetch current image path
     $stmt = $pdo->prepare("SELECT image FROM posts WHERE id = :post_id");
     $stmt->execute(['post_id' => $postId]);
@@ -31,8 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['post_id'])) {
     }
 
     // SQL update post
-    $stmt = $pdo->prepare("UPDATE posts SET title = :title, content = :content, image = :image WHERE id = :post_id");
-    $stmt->execute(['title' => $title, 'content' => $content, 'image' => $imagePath, 'post_id' => $postId]);
+    $stmt = $pdo->prepare("UPDATE posts SET title = :title, content = :content, image = :image , module_id = :module_id WHERE id = :post_id");
+    $stmt->execute(['title' => $title, 'content' => $content, 'image' => $imagePath, 'post_id' => $postId, 'module_id' => $module_id]);
 
     // Redirect back to my_question.php
     header("Location: my_question.php");

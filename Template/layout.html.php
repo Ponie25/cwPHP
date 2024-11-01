@@ -1,3 +1,4 @@
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/PHP-Web-main/PHP/session_start.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,9 +25,14 @@
                 <input type="text" name="search" placeholder="Type anything to search..." 
                     class="pl-10 hover:text-yellow-900 px-3 py-2 border rounded w-full md:w-64 lg:w-80"">
             </form>
-
         </div>
+        <!-- Admin Dashboard -->
+        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 1): ?>
+            <a href="/PHP-Web-main/PHP/admin_dashboard.php" class="hover:text-blue-700">Admin Dashboard</a>
+        <?php endif; ?>
 
+
+        
         <!-- Login/Register section -->
         <div class="login flex space-x-4">
             <?php if (isset($_SESSION['username'])): ?>
@@ -36,7 +42,7 @@
                         <i class="fa-solid fa-user"></i>
                         <?php echo htmlspecialchars($_SESSION['username']); ?>
                     </a>
-                    <a href="PHP/process_logout.php" class="hover:text-yellow-900 px-3 py-2 rounded">Logout</a>
+                    <a href="/PHP-Web-main/PHP/process_logout.php" class="hover:text-yellow-900 px-3 py-2 rounded">Logout</a>
                 </div>
             <?php else: ?>
                 <!-- Show Login and Register buttons if not logged in -->
@@ -73,6 +79,21 @@
         <div class="bg-white p-6 rounded-lg w-1/3">
             <h2 class="text-xl font-bold mb-4">Upload Post</h2>
             <form action="/PHP-Web-main/PHP/upload_post.php" method="POST" enctype="multipart/form-data">
+                <!-- Module -->
+                <!-- SQL statement to show all modules -->
+                <?php
+                $stmt = $pdo->query("SELECT id, module_name FROM modules");
+                $modules = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                ?>
+
+                <!-- Module Selection -->
+                <select name="module_id" id="module" required class="w-full p-2 border mb-4">
+                    <option value="">Select Module</option>
+                    <?php foreach ($modules as $module): ?>
+                        <option value="<?= $module['id'] ?>"><?= htmlspecialchars($module['module_name']) ?></option>
+                    <?php endforeach; ?>
+                </select>
+
                 <!-- Title -->
                 <input type="text" name="title" placeholder="Title" class="w-full p-2 border mb-4">
                 <!-- Content -->
@@ -115,7 +136,7 @@
         </div>
     </div>
 
-    <script src="/PHP-Web-Main/JS/script.js"></script>
+    <script src="/PHP-Web-main/JS/script.js"></script>
 
 
 </body>
