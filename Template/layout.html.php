@@ -17,10 +17,10 @@
         </div>
         <div class="mid flex item-center justify-center flex-grow"> 
             <a href="/PHP-Web-main/index.php" class="hover:text-yellow-900 px-3 py-2 rounded"><i class="fa-solid fa-igloo ml-4"></i> Home</a>
-            <a href="/about" class="hover:text-yellow-900 px-3 py-2 rounded"><i class="fa-regular fa-address-card ml-4"></i> About</a>
+            <a href="/PHP-Web-main/PHP/contact.php" class="hover:text-yellow-900 px-3 py-2 rounded"><i class="fa-regular fa-address-card ml-4"></i> Contact</a>
             <a href="/PHP-Web-main/PHP/my_question.php" class="hover:text-yellow-900 px-3 py-2 rounded"><i class="fa-solid fa-user-tie"></i> My Questions</a>
             <!-- Search bar -->
-            <form action="PHP/process_search.php" method="POST" class="relative flex items-center">
+            <form action="PHP/process_search.php" method="POST" class="relative flex items-center ml-2">
                 <i class="fa-solid fa-magnifying-glass absolute left-3 text-gray-500"></i>
                 <input type="text" name="search" placeholder="Type anything to search..." 
                     class="pl-10 hover:text-yellow-900 px-3 py-2 border rounded w-full md:w-64 lg:w-80"">
