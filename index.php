@@ -37,7 +37,7 @@ $modules = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <section class="mt-4 flex-grow">
         <?php
         // Module selected -> Show all posts in that module
-        if (isset($_GET['module_id'])) {
+        if (isset($_GET['module_id'])) {    
             $module_id = $_GET['module_id'];
             $stmt = $pdo->prepare("
                 SELECT posts.title, posts.content, posts.user_id, posts.likes, posts.comments, posts.bookmarks, posts.image, posts.created_at,
