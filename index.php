@@ -4,7 +4,7 @@ $title = 'Home - Student Social Media';
 ob_start();
 ?>
 
-<div class="flex items-center justify-between mb-4 w-full"> 
+<div class="flex items-center justify-between w-full mt-4"> 
     <div class="text-2xl font-bold">Newsfeed</div>
     <button onclick="toggleModal('uploadModal')" class="bg-black text-white px-4 py-2 rounded-lg hover:bg-blue-600" type="button">Upload</button>
 </div>
