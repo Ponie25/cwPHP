@@ -7,11 +7,11 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 min-h-screen">
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/PHP-Web-main/PHP/config/db.php'; ?>
     
     <!-- Header -->
-    <header class="flex items-center justify-between bg-white text-black p-4">
+    <header class="flex items-center justify-between bg-white text-black p-4 shadow-md">
         <div class="logo">
             <img src="/PHP-Web-main/images/logo.jpeg" alt="Student Social Media" class="w-16 h-12 rounded-lg">
         </div>
@@ -54,22 +54,11 @@
     </header>
 
     <!-- Main Content -->
-    <main class="px-40">
+    <main class="px-40 min-h-screen">
         <?php echo $content; ?>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-white text-black py-4">
-        <div class="container mx-auto text-center">
-            <p>© 2024 Student Social Media. All rights reserved.</p>
-            <p>Dev : Thanh</p>
-            <div class="flex space-x-4 justify-center items-center mt-2">
-                <i class="fa-brands fa-facebook"></i>
-                <i class="fa-brands fa-github"></i>
-                <i class="fa-brands fa-telegram"></i>
-            </div>
-        </div>
-    </footer>
+
 
 
     <!-- Modal -->
@@ -145,4 +134,16 @@
 
 
 </body>
+    <!-- Footer -->
+<footer class="bg-white text-black py-4 shadow-md">
+<div class="container mx-auto text-center">
+    <p>© 2024 Student Social Media. All rights reserved.</p>
+    <p>Dev : Thanh</p>
+    <div class="flex space-x-4 justify-center items-center mt-2">
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-github"></i>
+        <i class="fa-brands fa-telegram"></i>
+    </div>
+</div>
+</footer>
 </html>

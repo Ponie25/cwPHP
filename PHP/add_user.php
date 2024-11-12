@@ -10,24 +10,36 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $role = $_POST["role"];
 
     if (!empty($username) && !empty($password) && isset($role)) {
-        // SQL statement
-        $stmt = $pdo->prepare("INSERT INTO users (username, password, role) VALUES (:username, :password, :role)");
-        $stmt->execute([
-            ':username' => $username,
-            ':password' => password_hash($password, PASSWORD_DEFAULT),
-            ':role' => $role
-        ]);
+        // Check if username already exists
+        $checkStmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE username = :username");
+        $checkStmt->execute([':username' => $username]);
+        $userExists = $checkStmt->fetchColumn() > 0;
 
-        // Redirect back to the main page with a success message
-        header("Location: ../index.php?message=User+added+successfully");
-        exit;
+        if ($userExists) {
+            // If username exists
+            echo "<script>
+                alert('Username already exists');
+                window.location.href = '/PHP-Web-main/PHP/admin_dashboard.php';
+                </script>";
+        } else {
+            $stmt = $pdo->prepare("INSERT INTO users (username, password, role) VALUES (:username, :password, :role)");
+            $stmt->execute([
+                ':username' => $username,
+                ':password' => password_hash($password, PASSWORD_DEFAULT),
+                ':role' => $role
+            ]);
+            // Success
+            echo "<script>
+                alert('User added successfully.');
+                window.location.href = '/PHP-Web-main/PHP/admin_dashboard.php';
+                </script>";
+        }
     } else {
-        // Redirect back with an error message if fields are empty
-        header("Location: ../admin_dashboard.php?error=Please+fill+in+all+fields");
-        exit;
+        // If empty 
+        echo "<script>
+            alert('Please fill in all fields.');    
+            window.location.href = '/PHP-Web-main/PHP/admin_dashboard.php';
+            </script>";
     }
-} else {
-    // Redirect if accessed without POST
-    header("Location: ../admin_dashboard.php");
-    exit;
 }
+?>
