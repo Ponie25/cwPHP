@@ -16,10 +16,10 @@
     
     <!-- Header -->
     <nav x-data="{ isOpen: false }" class="relative bg-white shadow">
-    <div class="container px-6 mx-auto md:flex">
+    <div class="container px-6 mx-auto md:flex w-full">
         <div class="flex items-center justify-between">
             <a href="#">
-                <img class="h-12 w-auto object-contain object-center" src="images/logo1.png" alt="logo">
+                <img class="h-12 w-auto object-contain object-center" src="/PHP-Web-main/images/logo1.png" alt="logo">
             </a>
 
             <!-- Mobile menu button -->
@@ -39,8 +39,8 @@
         <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
         <div x-cloak :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']" class="absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white md:mt-0 md:p-0 md:top-0 md:relative md:opacity-100 md:translate-x-0 md:flex md:items-center md:justify-between">
             <div class="flex flex-col px-2 -mx-4 md:flex-row md:mx-10 md:py-0">
-                <a href="../index.php" class="px-2.5 py-2 text-gray-700 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 md:mx-2">Home</a>
-                <a href="PHP/contact.php" class="px-2.5 py-2 text-gray-700 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 md:mx-2">Contact</a>
+                <a href="/PHP-Web-main/index.php" class="px-2.5 py-2 text-gray-700 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 md:mx-2">Home</a>
+                <a href="/PHP-Web-main/PHP/contact.php" class="px-2.5 py-2 text-gray-700 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 md:mx-2">Contact</a>
                 <!-- Admin Dashboard -->
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 1): ?>
                     <a href="/PHP-Web-main/PHP/admin_dashboard.php" class="px-2.5 py-2 text-gray-700 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 md:mx-2">Admin Dashboard</a>
@@ -104,7 +104,7 @@
 <div class="flex">
     <aside class="flex flex-col w-64 h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l">
         <a href="#">
-            <img class="h-10 w-auto object-contain object-center" src="images/logo2.png" alt="">
+            <img class="h-10 w-auto object-contain object-center" src="/PHP-Web-main/images/logo2.png" alt="">
         </a>
 
         <div class="flex flex-col justify-between flex-1 mt-6">
@@ -112,12 +112,12 @@
                 <div class="space-y-3">
                     <label class="px-3 text-xs text-gray-500 uppercase">home</label>
 
-                    <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 hover:text-gray-700" href="../index.php">
+                    <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 hover:text-gray-700" href="/PHP-Web-main/index.php">
                         <i class="fa-solid fa-house"></i>
                         <span class="mx-2 text-sm font-medium">Home Page</span>
                     </a>
 
-                    <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 hover:text-gray-700" href="PHP/my_question.php">
+                    <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg hover:bg-gray-100 hover:text-gray-700" href="/PHP-Web-main/PHP/my_question.php">
                     <i class="fa-solid fa-folder"></i>
                         <span class="mx-2 text-sm font-medium">My Question</span>
                     </a>
@@ -138,7 +138,7 @@
                         <ul id="module-dropdown" class="hidden py-2 pl-8 space-y-2">
                             <?php foreach ($modules as $module): ?>
                                 <li>
-                                    <a href="index.php?module_id=<?= $module['id']; ?>" class="block p-2 text-gray-900 rounded-lg hover:bg-gray-100">
+                                    <a href="/PHP-Web-main/index.php?module_id=<?= $module['id']; ?>" class="block p-2 text-gray-900 rounded-lg hover:bg-gray-100">
                                         <?php echo htmlspecialchars($module['module_name']); ?>
                                     </a>
                                 </li>
@@ -256,7 +256,7 @@
             <!-- Info -->
             <div class="px-6 py-4">
                 <div class="flex justify-center mx-auto">
-                    <img class="w-auto h-7 sm:h-8" src="https://merakiui.com/images/logo.svg" alt="">
+                    <img class="w-auto h-7 sm:h-8" src="/PHP-Web-main/images/logo.svg" alt="">
                 </div>
 
                 <h3 class="mt-3 text-xl font-medium text-center text-gray-600">Welcome Back</h3>
@@ -301,7 +301,7 @@
             <!-- Info -->
             <div class="px-6 py-4">
                 <div class="flex justify-center mx-auto">
-                    <img class="w-auto h-7 sm:h-8" src="https://merakiui.com/images/logo.svg" alt="">
+                    <img class="w-auto h-7 sm:h-8" src="/PHP-Web-main/images/logo.svg" alt="">
                 </div>
 
                 <h3 class="mt-3 text-xl font-medium text-center text-gray-600">Welcome to our system</h3>
