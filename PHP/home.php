@@ -10,7 +10,7 @@ $modules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if (isset($_GET['module_id'])) {    
     $module_id = $_GET['module_id'];
     $stmt = $pdo->prepare("
-        SELECT posts.title, posts.content, posts.user_id, posts.likes, posts.comments, posts.bookmarks, posts.image, posts.created_at,
+        SELECT posts.id, posts.title, posts.content, posts.user_id, posts.likes, posts.comments, posts.bookmarks, posts.image, posts.created_at,
                modules.module_name 
         FROM posts 
         LEFT JOIN modules ON posts.module_id = modules.id
@@ -22,7 +22,7 @@ if (isset($_GET['module_id'])) {
 } else {
     // Fetch all posts if no module is selected
     $stmt = $pdo->query("
-        SELECT posts.title, posts.content, posts.user_id, posts.likes, posts.comments, posts.bookmarks, posts.image, posts.created_at,
+        SELECT posts.id, posts.title, posts.content, posts.user_id, posts.likes, posts.comments, posts.bookmarks, posts.image, posts.created_at,
                modules.module_name 
         FROM posts 
         LEFT JOIN modules ON posts.module_id = modules.id 

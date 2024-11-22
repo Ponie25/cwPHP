@@ -27,8 +27,31 @@
                     
                     <div class='flex items-center justify-between mt-2 absolute bottom-2 w-full'>
                         <div class="flex items-center">
-                            <i class='fa-regular fa-heart'></i><span class='ml-1.5'><?php echo $post['likes']; ?></span>
-                            <i class='fa-regular fa-comment ml-4'></i><span class='ml-1.5'><?php echo $post['comments']; ?></span>
+                            <!-- Like Button -->
+                            <div class="flex">
+                                <div class="">
+                                    <form action="/PHP-Web-main/PHP/like_post.php" method="post">
+                                        <input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
+                                        <button type="submit" class="hover:text-red-600 focus:outline-none">
+                                            <i class="fa-regular fa-heart"></i>
+                                            <span class="ml-1.5"><?php echo $post['likes']; ?></span>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- Comment -->
+                            <div class="flex">
+                                <div class="">
+                                    <form action="/PHP-Web-main/PHP/comment_post.php" method="post">
+                                        <input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
+                                        <button onclick="toggleModal('commentModal')" class="focus:outline-none">
+                                            <i class='fa-regular fa-comment ml-4'></i>
+                                            <span class='ml-1.5'><?php echo $post['comments']; ?></span>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- Bookmark -->
                             <i class='fa-regular fa-bookmark ml-4'></i><span class='ml-1.5'><?php echo $post['bookmarks']; ?></span>
                         </div>
                         <div class='flex text-gray-500 text-sm space-x-2 px-6'>

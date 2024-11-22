@@ -1,85 +1,60 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/PHP-Web-main/vendor/autoload.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/PHP-Web-main/PHP/session_start.php';
 
-// Variables
-$server_email = ""; // Your Gmail address here
-$server_password = ""; // Your Gmail app-specific password here
-$adminEmail = 'silkyy2507@gmail.com';
+// Import PHPMailer classes into the global namespace
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
+// Load Composer's autoloader
+require '../vendor/autoload.php';
 
+// Create an instance; passing `true` enables exceptions
+$mail = new PHPMailer(true);
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Check if form is submitted
+    $subject = trim($_POST['subject'] ?? '');
+    $body = trim($_POST['body'] ?? '');
+    $altbody = trim($_POST['altbody'] ?? '');
 
-
-
-// Handle form submission
-$messageSent = false;
-$error = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_SESSION['username']; // Get name from session
-    $email = trim($_POST['email']); // User's email from form
-    $subject = trim($_POST['subject']);
-    $messageContent = trim($_POST['message']);
-
-    // Validate form fields
-    if (!empty($name) && !empty($email) && !empty($subject) && !empty($messageContent)) {
-        // Initialize SwiftMailer with Gmail's SMTP settings
-        $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'tls'))
-            ->setUsername($server_email) 
-            ->setPassword($server_password); 
-
-        $mailer = new Swift_Mailer($transport);
-
-        // Compose the email message
-        $message = (new Swift_Message($subject))
-            ->setFrom([$email => $name])
-            ->setTo([$adminEmail => 'Admin'])
-            ->setBody("Name: $name\n$messageContent");
-
-        // Send the email
-        try {
-            $mailer->send($message);
-            $messageSent = true;
-        } catch (Exception $e) {
-            $error = "Message could not be sent. Error: " . $e->getMessage();
-        }
+    // Validate inputs
+    if (empty($subject) || empty($body) || empty($altbody)) {
+        echo "<script>alert('Please fill in all the fields before submitting');</script>";
     } else {
-        $error = "Please fill in all fields.";
+        try {
+            // Server settings
+            $mail->SMTPDebug = SMTP::DEBUG_OFF;                 // Disable verbose debug output
+            $mail->isSMTP();                                     // Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                // Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                            // Enable SMTP authentication
+            $mail->Username   = 'ponie.mailforwork@gmail.com';   // SMTP username
+            $mail->Password   = 'lyez wypm fwqv opjw';           // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable implicit TLS encryption
+            $mail->Port       = 587;                             // TCP port to connect to
+
+            // Recipients
+            $mail->setFrom('ponie.mailforwork@gmail.com', 'Admin'); // Admin email
+            $mail->addAddress('mrsyuri312@gmail.com');      // Recipient
+
+            // Content
+            $mail->isHTML(true);                               // Set email format to HTML
+            $mail->Subject = $subject;
+            $mail->Body    = $body;
+            $mail->AltBody = $altbody;
+
+            $mail->send();
+
+            // Success message
+            echo "<script>alert('Message has been sent');</script>";
+        } catch (Exception $e) {
+            // Error message
+            $errorMessage = $mail->ErrorInfo;
+            echo "<script>alert('Message could not be sent. Mailer Error: $errorMessage');</script>";
+        }
     }
 }
-ob_start()
-?>
-<section class="">
-    <div class="max-w-md mx-auto mt-10 bg-white p-6 rounded shadow">
-        <h2 class="text-2xl font-bold mb-4">Contact Admin</h2>
 
-        <?php if ($messageSent): ?>
-            <p class="text-green-500">Your message has been sent successfully!</p>
-        <?php else: ?>
-            <?php if (!empty($error)): ?>
-                <p class="text-red-500"><?= htmlspecialchars($error) ?></p>
-            <?php endif; ?>
-
-            <form action="contact.php" method="post">
-                <div class="mb-4">
-                    <label for="email" class="block text-sm font-medium">Email</label>
-                    <input type="email" id="email" name="email" class="w-full p-2 border rounded" required>
-                </div>
-                <div class="mb-4">
-                    <label for="subject" class="block text-sm font-medium">Subject</label>
-                    <input type="text" id="subject" name="subject" class="w-full p-2 border rounded" required>
-                </div>
-                <div class="mb-4">
-                    <label for="message" class="block text-sm font-medium">Message</label>
-                    <textarea id="message" name="message" rows="4" class="w-full p-2 border rounded" required></textarea>
-                </div>
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Send Message</button>
-            </form>
-        <?php endif; ?>
-    </div>
-</section>
-</html>
-<?php
+ob_start();
+include '../Template/contact.html.php';
 $content = ob_get_clean();
-include '../Template/layout.html.php'; ?>
+
+include '../Template/layout.html.php';
