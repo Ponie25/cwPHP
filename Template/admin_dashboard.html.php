@@ -4,7 +4,6 @@
     <div class="flex space-x-4 mb-6">
         <button onclick="toggleModal('managepostModal')" class="bg-blue-500 text-white px-4 py-2 rounded">Manage Posts</button>
         <button onclick="toggleModal('manageuserModal')" class="bg-blue-500 text-white px-4 py-2 rounded">Manage Users</button>
-        <button onclick="toggleModal('adduserModal')" class="bg-blue-500 text-white px-4 py-2 rounded">Add user</button>
         <button onclick="toggleModal('managemoduleModal')" class="bg-blue-500 text-white px-4 py-2 rounded">Manage module</button>
     </div>
 
@@ -50,7 +49,10 @@
 
     <!-- Manage Users Modal -->
     <div id="manageuserModal" class="hidden">
-        <h2 class="text-xl font-semibold mb-3">Manage Users</h2>
+        <div class="flex space-x-8 items-center mb-3 font-semibold justify-between">
+            <h2 class="text-xl font-semibold mb-3">Manage Users</h2>
+            <button onclick="toggleModal('adduserModal')" class="p-2 rounded-md border-black border-2">Add user</button>
+        </div>
         <?php foreach ($users as $user): ?>
             <div class="bg-white shadow-lg rounded-lg p-4 mb-4 flex">
                 <!-- User Information -->

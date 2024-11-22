@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Check if form is submitted
             $mail->Host       = 'smtp.gmail.com';                // Set the SMTP server to send through
             $mail->SMTPAuth   = true;                            // Enable SMTP authentication
             $mail->Username   = 'ponie.mailforwork@gmail.com';   // SMTP username
-            $mail->Password   = 'lyez wypm fwqv opjw';           // SMTP password
+            $mail->Password   = 'secret';           // SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable implicit TLS encryption
             $mail->Port       = 587;                             // TCP port to connect to
 
